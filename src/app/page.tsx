@@ -1,24 +1,62 @@
 "use client";
+import { useState } from "react";
+import TodoList from "../components/TodoList";
+import TodoForm from "../components/TodoForm";
+import Search from "@/components/Search";
 
 export default function Home() {
-  return (
-    <div className="flex-1 flex flex-col">
-      <h1>Bem-vindo à NexTech Connect</h1>
-      <p>Sua plataforma de tecnologia tudo-em-um!</p>
+  const [todos, setTodos] = useState([
+    {
+      text: "Learn about React",
+      category: "work",
+      id: 1,
+      isCompleted: false,
+    },
+    {
+      text: "Meet friend for lunch",
+      category: "personal",
+      id: 2,
+      isCompleted: false,
+    },
+    {
+      text: "Build really cool todo app",
+      category: "work",
+      id: 3,
+      isCompleted: false,
+    },
+  ]);
 
-      <div className="latest-updates">
-        <h2>Últimas Atualizações</h2>
-        <ul>
-          <li>Novo serviço lançado: Consultoria em TI Avançada</li>
-          <li>
-            Atualização do aplicativo disponível! Baixe agora para obter novos
-            recursos.
-          </li>
-          <li>
-            Participe do nosso webinar gratuito sobre Segurança Cibernética.
-          </li>
-        </ul>
-      </div>
+  const addTodo = (text: string, category: string) => {
+    const newTodos = [
+      ...todos,
+      { text, category, id: todos.length + 1, isCompleted: false },
+    ];
+    setTodos(newTodos);
+  };
+
+  const removeTodo = (id: number) => {
+    const newTodos = [...todos.filter((todo) => todo.id !== id)];
+    setTodos(newTodos);
+  };
+
+  const completeTodo = (id: number) => {
+    const newTodos = [...todos];
+    newTodos.map((todo) => {
+      todo.id === id
+        ? (todo.isCompleted = !todo.isCompleted)
+        : todo.isCompleted;
+    });
+    setTodos(newTodos);
+  };
+
+  return (
+    <div>
+      <TodoList
+        todos={todos}
+        removeTodo={removeTodo}
+        completeTodo={completeTodo}
+      />
+      <TodoForm addTodo={addTodo} />
     </div>
   );
 }
