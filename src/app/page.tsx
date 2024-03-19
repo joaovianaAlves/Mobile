@@ -1,30 +1,42 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TodoList from "../components/TodoList";
 import TodoForm from "../components/TodoForm";
-import Search from "@/components/Search";
+import { Preferences } from "@capacitor/preferences";
 
 export default function Home() {
-  const [todos, setTodos] = useState([
+  const get = async (): Promise<
     {
-      text: "Learn about React",
-      category: "work",
-      id: 1,
-      isCompleted: false,
-    },
-    {
-      text: "Meet friend for lunch",
-      category: "personal",
-      id: 2,
-      isCompleted: false,
-    },
-    {
-      text: "Build really cool todo app",
-      category: "work",
-      id: 3,
-      isCompleted: false,
-    },
-  ]);
+      text: string;
+      category: string;
+      id: number;
+      isCompleted: boolean;
+    }[]
+  > => {
+    const { value } = await Preferences.get({ key: "todos" });
+    return value ? JSON.parse(value) : [];
+  };
+
+  const [todos, setTodos] = useState<
+    { text: string; category: string; id: number; isCompleted: boolean }[]
+  >([]);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const initialTodos = await get();
+      setTodos(initialTodos);
+    };
+
+    fetchTodos();
+  }, []);
+
+  const save = async (todos: any) => {
+    await Preferences.set({ key: "todos", value: JSON.stringify(todos) });
+  };
+
+  useEffect(() => {
+    save(todos);
+  }, [todos]);
 
   const addTodo = (text: string, category: string) => {
     const newTodos = [
@@ -42,9 +54,10 @@ export default function Home() {
   const completeTodo = (id: number) => {
     const newTodos = [...todos];
     newTodos.map((todo) => {
-      todo.id === id
-        ? (todo.isCompleted = !todo.isCompleted)
-        : todo.isCompleted;
+      if (todo.id === id) {
+        todo.isCompleted = !todo.isCompleted;
+      }
+      return todo;
     });
     setTodos(newTodos);
   };
