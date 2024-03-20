@@ -63,7 +63,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className=" pt-10 mx-auto max-w-96 flex flex-col justify-between">
       <TodoList
         todos={todos}
         removeTodo={removeTodo}
