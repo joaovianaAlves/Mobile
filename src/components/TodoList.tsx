@@ -1,6 +1,8 @@
 import React from "react";
 import Search from "./Search";
 import { useState } from "react";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa";
 
 interface Todo {
   id: number;
@@ -34,7 +36,9 @@ export default function TodoList({
             .map((todo) => (
               <div
                 key={todo.id}
-                className="border p-2 sm:p-4 rounded mb-2 flex flex-col sm:flex-row justify-between items-start sm:items-center"
+                className={`border p-2 sm:p-4 rounded mb-2 flex flex-col sm:flex-row justify-between items-start sm:items-center ${
+                  todo.isCompleted ? "bg-gray-400 text-gray-200" : ""
+                }`}
                 style={{
                   textDecoration: todo.isCompleted ? "line-through" : "",
                 }}
@@ -48,15 +52,17 @@ export default function TodoList({
                 <div className="mt-2 sm:mt-0">
                   <button
                     onClick={() => completeTodo(todo.id)}
-                    className="bg-blue-500 text-white rounded px-2 py-1 mr-2 hover:bg-blue-700"
+                    className={`bg-blue-500 text-white rounded px-4 py-2 mr-2 hover:bg-blue-700 ${
+                      todo.isCompleted ? "bg-green-800" : ""
+                    }`}
                   >
-                    Completar
+                    <FaCheck />
                   </button>
                   <button
                     onClick={() => removeTodo(todo.id)}
-                    className="bg-red-500 text-white rounded px-2 py-1 hover:bg-red-700"
+                    className="bg-red-500 text-white rounded px-4 py-2 hover:bg-red-700"
                   >
-                    Deletar
+                    <FaRegTrashCan />
                   </button>
                 </div>
               </div>
