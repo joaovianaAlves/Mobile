@@ -26,9 +26,9 @@ export default function TodoList({
   return (
     <>
       <Search search={search} setSearch={setSearch} />
-      <div className="p-6 overflow-auto">
+      <div className="p-6 overflow-auto ">
         <h1 className="text-2xl font-bold mb-4">Lista de Tarefas</h1>
-        <div className="overflow-auto max-h-[300px]">
+        <div className="max-h-[500px] bg-[#696969] rounded-lg">
           {todos
             .filter((todo) =>
               todo.text.toLowerCase().includes(search.toLowerCase())
@@ -36,7 +36,7 @@ export default function TodoList({
             .map((todo) => (
               <div
                 key={todo.id}
-                className={`border p-2 sm:p-4 rounded mb-2 flex flex-col sm:flex-row justify-between items-start sm:items-center ${
+                className={` p-2 sm:p-4 mb-2 flex flex-col sm:flex-row justify-between items-start sm:items-center ${
                   todo.isCompleted ? "bg-gray-400 text-gray-200" : ""
                 }`}
                 style={{
@@ -45,14 +45,12 @@ export default function TodoList({
               >
                 <div>
                   <p className="font-semibold">{todo.text}</p>
-                  <p className="text-xs sm:text-sm text-gray-500">
-                    {todo.category}
-                  </p>
+                  <p className="text-xs sm:text-sm">{todo.category}</p>
                 </div>
                 <div className="mt-2 sm:mt-0">
                   <button
                     onClick={() => completeTodo(todo.id)}
-                    className={`bg-blue-500 text-white rounded px-4 py-2 mr-2 hover:bg-blue-700 ${
+                    className={`bg-[#708090] rounded-md px-4 py-2 mr-2 hover:bg-[#778899] ${
                       todo.isCompleted ? "bg-green-800" : ""
                     }`}
                   >
@@ -60,7 +58,7 @@ export default function TodoList({
                   </button>
                   <button
                     onClick={() => removeTodo(todo.id)}
-                    className="bg-red-500 text-white rounded px-4 py-2 hover:bg-red-700"
+                    className="bg-[#708090] rounded-md px-4 py-2 hover:bg-[#778899]"
                   >
                     <FaRegTrashCan />
                   </button>

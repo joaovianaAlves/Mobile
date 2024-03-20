@@ -26,12 +26,12 @@ export default function TodoForm({ addTodo }: TodoFormProps) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Digite o Titulo"
-          className="w-full p-2 border rounded"
+          className="w-full p-2 rounded bg-[#696969]"
         />
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 rounded bg-[#696969]"
         >
           <option value="">Selecione</option>
           <option value="Trabalho">Trabalho</option>
@@ -40,7 +40,7 @@ export default function TodoForm({ addTodo }: TodoFormProps) {
         </select>
         <button
           type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          className="w-full p-2 bg-[#708090] text-[#F4EEE0] rounded-md hover:bg-[#778899]"
         >
           Criar Tarefa
         </button>
