@@ -63,13 +63,17 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-auto max-w-96 flex flex-col justify-between bg-[#2F4F4F] text-[#F5F5F5]">
-      <TodoList
-        todos={todos}
-        removeTodo={removeTodo}
-        completeTodo={completeTodo}
-      />
-      <TodoForm addTodo={addTodo} />
+    <div className="mx-auto min-h-screen sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg 2xl:max-w-xl flex flex-col bg-[#2F4F4F] text-[#F5F5F5]">
+      <div className="flex-grow">
+        <TodoList
+          todos={todos}
+          removeTodo={removeTodo}
+          completeTodo={completeTodo}
+        />
+      </div>
+      <div className="mt-auto">
+        <TodoForm addTodo={addTodo} />
+      </div>
     </div>
   );
 }

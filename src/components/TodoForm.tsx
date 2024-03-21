@@ -18,8 +18,8 @@ export default function TodoForm({ addTodo }: TodoFormProps) {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Criar tarefa:</h1>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-1">Criar tarefa:</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
