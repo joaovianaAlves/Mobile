@@ -63,7 +63,11 @@ export default function Home() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="mx-auto min-h-screen sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg 2xl:max-w-xl flex flex-col bg-[#2F4F4F] text-[#F5F5F5]">
+=======
+    <div className="mx-auto min-h-screen max-w-96 flex flex-col bg-[#2F4F4F] text-[#F5F5F5]">
+>>>>>>> 2d6344ba6427db428eb81bd4eee9f88cd637d191
       <div className="flex-grow">
         <TodoList
           todos={todos}

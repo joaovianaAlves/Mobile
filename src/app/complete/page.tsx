@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from "react";
-import Search from "./Search";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FaCheck } from "react-icons/fa";
+"use client";
+import React, { useState } from "react";
+import Search from "@/components/Search";
+import { FaRegTrashCan, FaCheck } from "react-icons/fa";
 
 interface Todo {
   id: number;
@@ -16,7 +16,7 @@ interface TodoListProps {
   completeTodo: (id: number) => void;
 }
 
-export default function TodoList({
+export default function Page({
   todos,
   removeTodo,
   completeTodo,
@@ -26,10 +26,10 @@ export default function TodoList({
   return (
     <>
       <Search search={search} setSearch={setSearch} />
-      <div className="p-6 overflow-auto ">
-        <h1 className="text-2xl font-bold mb-4">Lista de Tarefas</h1>
-        <div className="max-h-[500px] bg-[#696969] rounded-lg">
-          {todos
+      <h2 className="m-4">Completed Tasks</h2>
+      <div className="overflow-auto max-h-[200px]">
+        {todos && todos.length > 0 ? (
+          todos
             .filter(
               (todo) =>
                 todo.isCompleted &&
@@ -38,38 +38,36 @@ export default function TodoList({
             .map((todo) => (
               <div
                 key={todo.id}
-                className={` p-2 sm:p-4 mb-2 flex flex-col sm:flex-row justify-between items-start sm:items-center ${
-                  todo.isCompleted ? "bg-gray-400 text-gray-200" : ""
+                className={` p-2 sm:p-4 mb-2 flex flex-col sm:flex-row  ${
+                  todo.isCompleted ? "bg-gray-400 text-gray-200 rounded-md" : ""
                 }`}
                 style={{
                   textDecoration: todo.isCompleted ? "line-through" : "",
                 }}
               >
                 <div>
-                  <p className="text-sm sm:text-base font-semibold">
-                    {todo.text}
-                  </p>
-                  <p className="text-xs">{todo.category}</p>
+                  <p className="font-semibold">{todo.text}</p>
+                  <p className="text-xs sm:text-sm">{todo.category}</p>
                 </div>
-                <div className="mt-1 sm:mt-0">
+                <div className="mt-2 sm:mt-0">
                   <button
                     onClick={() => completeTodo(todo.id)}
-                    className={`bg-[#708090] rounded-md px-4 py-2 mr-2 hover:bg-[#778899] ${
-                      todo.isCompleted ? "bg-green-800" : ""
-                    }`}
+                    className={`bg-[#708090] rounded-md px-4 py-2 mr-2 hover:bg-[#778899]`}
                   >
                     <FaCheck />
                   </button>
                   <button
                     onClick={() => removeTodo(todo.id)}
-                    className="bg-[#708090] rounded-md px-2 py-1 hover:bg-[#778899]"
+                    className="bg-[#708090] rounded-md px-4 py-2 hover:bg-[#778899]"
                   >
                     <FaRegTrashCan />
                   </button>
                 </div>
               </div>
-            ))}
-        </div>
+            ))
+        ) : (
+          <p>No completed tasks found.</p>
+        )}
       </div>
     </>
   );
