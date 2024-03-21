@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Head from "next/head";
@@ -26,10 +25,7 @@ export default function RootLayout({
       </Head>
       <body className={inter.className}>
         <div>
-          <main>
-            {children}
-            <Navbar />
-          </main>
+          <main>{children}</main>
         </div>
       </body>
     </html>

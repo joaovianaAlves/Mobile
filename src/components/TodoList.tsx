@@ -22,13 +22,49 @@ export default function TodoList({
   completeTodo,
 }: TodoListProps) {
   const [search, setSearch] = useState("");
-
   return (
     <>
       <Search search={search} setSearch={setSearch} />
-      <div className="p-6 overflow-auto ">
-        <h1 className="text-2xl font-bold mb-4">Lista de Tarefas</h1>
-        <div className="max-h-[500px] bg-[#696969] rounded-lg">
+      <div className="p-5">
+        <h1 className="text-2xl font-bold mb-2">Lista de Tarefas</h1>
+        <div className="overflow-auto max-h-[150px] overflow-y-auto">
+          {todos
+            .filter(
+              (todo) =>
+                !todo.isCompleted &&
+                todo.text.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((todo) => (
+              <div
+                key={todo.id}
+                className={`p-1 sm:p-2 mb-1 flex flex-row justify-between rounded-md items-center bg-[#696969] `}
+              >
+                <div>
+                  <p className="text-sm sm:text-base font-semibold">
+                    {todo.text}
+                  </p>{" "}
+                  <p className="text-xs">{todo.category}</p>
+                </div>
+                <div>
+                  {" "}
+                  <button
+                    onClick={() => completeTodo(todo.id)}
+                    className={`bg-[#708090] rounded-md px-2 py-1 mr-1 hover:bg-[#778899] `}
+                  >
+                    <FaCheck />
+                  </button>
+                  <button
+                    onClick={() => removeTodo(todo.id)}
+                    className="bg-[#708090] rounded-md px-2 py-1 hover:bg-[#778899]"
+                  >
+                    <FaRegTrashCan />
+                  </button>
+                </div>
+              </div>
+            ))}
+        </div>
+        <h2 className="m-4">Completed Tasks</h2>
+        <div className="overflow-auto max-h-[150px] overflow-y-auto">
           {todos
             .filter(
               (todo) =>
@@ -38,9 +74,9 @@ export default function TodoList({
             .map((todo) => (
               <div
                 key={todo.id}
-                className={` p-2 sm:p-4 mb-2 flex flex-col sm:flex-row justify-between items-start sm:items-center ${
-                  todo.isCompleted ? "bg-gray-400 text-gray-200" : ""
-                }`}
+                className={` p-1 sm:p-2 mb-1 flex flex-row justify-between items-center ${
+                  todo.isCompleted ? "bg-gray-400 text-gray-200 rounded-md" : ""
+                }`} // Changed flex direction to row
                 style={{
                   textDecoration: todo.isCompleted ? "line-through" : "",
                 }}
@@ -48,15 +84,14 @@ export default function TodoList({
                 <div>
                   <p className="text-sm sm:text-base font-semibold">
                     {todo.text}
-                  </p>
+                  </p>{" "}
                   <p className="text-xs">{todo.category}</p>
                 </div>
-                <div className="mt-1 sm:mt-0">
+                <div>
+                  {" "}
                   <button
                     onClick={() => completeTodo(todo.id)}
-                    className={`bg-[#708090] rounded-md px-4 py-2 mr-2 hover:bg-[#778899] ${
-                      todo.isCompleted ? "bg-green-800" : ""
-                    }`}
+                    className={`bg-[#708090] rounded-md px-2 py-1 mr-1 hover:bg-[#778899]`}
                   >
                     <FaCheck />
                   </button>

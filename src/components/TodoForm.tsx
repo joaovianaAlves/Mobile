@@ -17,13 +17,8 @@ export default function TodoForm({ addTodo }: TodoFormProps) {
   };
 
   return (
-<<<<<<< HEAD
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-1">Criar tarefa:</h1>
-=======
-    <div className="p-6 mb-14">
-      <h1 className="text-2xl font-bold mb-4">Criar tarefa:</h1>
->>>>>>> 2d6344ba6427db428eb81bd4eee9f88cd637d191
+      <h1 className="text-2xl font-bold">Criar tarefa:</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <label htmlFor="todoInput" className="sr-only">
           Digite o Título:
@@ -45,7 +40,7 @@ export default function TodoForm({ addTodo }: TodoFormProps) {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           className="w-full p-2 rounded bg-[#696969] focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required // Mark the select as required for better validation
+          required
         >
           <option value="">Selecione</option>
           <option value="Trabalho">Trabalho</option>
