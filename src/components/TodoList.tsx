@@ -27,7 +27,7 @@ export default function TodoList({
       <Search search={search} setSearch={setSearch} />
       <div className="p-5">
         <h1 className="text-2xl font-bold mb-2">Lista de Tarefas</h1>
-        <div className="overflow-auto max-h-[150px] overflow-y-auto">
+        <div className="overflow-auto h-[150px] overflow-y-auto">
           {todos
             .filter(
               (todo) =>
@@ -64,7 +64,7 @@ export default function TodoList({
             ))}
         </div>
         <h2 className="m-4">Completed Tasks</h2>
-        <div className="overflow-auto max-h-[150px] overflow-y-auto">
+        <div className="overflow-auto h-[150px] overflow-y-auto">
           {todos
             .filter(
               (todo) =>
