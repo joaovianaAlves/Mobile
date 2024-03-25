@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import TodoList from "../components/TodoList";
 import TodoForm from "../components/TodoForm";
 import { Preferences } from "@capacitor/preferences";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { Database } from "firebase/database";
 
 export default function Home() {
   const get = async (): Promise<
