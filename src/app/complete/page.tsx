@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Search from "@/components/Search";
-import { FaRegTrashCan, FaCheck } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 interface Todo {
   id: number;
@@ -60,7 +61,7 @@ export default function Page({
                     onClick={() => removeTodo(todo.id)}
                     className="bg-[#708090] rounded-md px-4 py-2 hover:bg-[#778899]"
                   >
-                    <FaRegTrashCan />
+                    <FaRegTrashAlt />
                   </button>
                 </div>
               </div>
